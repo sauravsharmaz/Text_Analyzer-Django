@@ -16,14 +16,22 @@ def ProcessText(request):
 		tmpStr=""
 		for char in InpTxt:
 			tmpStr+= char.upper()
-		params={'purpose':'Converted to upper case','result':tmpStr}
-		return render(request,"al.html",params)
+		InpTxt= tmpStr
+		# params={'purpose':'Converted to upper case','result':tmpStr}
+		# return render(request,"al.html",params)
 
-	elif puncRem=='on':
+	if puncRem=='on':
 		punctuations= '''!()-[]{};:'"\,<>./?@#$%^&*_`~'''
 		tmpStr=""
 		for char in InpTxt:
 			if char not in punctuations:
 				tmpStr+= char
-		params={'purpose':'Punctuations Removed','result':tmpStr}
-		return render(request, 'al.html',params)
+		# params={'purpose':'Punctuations Removed','result':tmpStr}
+		# return render(request, 'al.html',params)
+		InpTxt=tmpStr
+	
+	if(fullcaps!='on' and puncRem != 'on'):
+		return HttpResponse("Please choose a checkbox")
+
+	params={'purpose':'Analyzed','result':tmpStr}
+	return render(request,"al.html",params)
