@@ -87,7 +87,7 @@
                     <h1>Enter your text here...!</h1>
                 </div>
                 <!-- Text Area -->
-                <form action="/analyzed" method="get">
+                <form action="/analyzed/" method="post">{% csrf_token %}
                     <textarea class="form-control my-1" name="textarea" rows="3">
                     </textarea>
                     <!-- CheckBox -->

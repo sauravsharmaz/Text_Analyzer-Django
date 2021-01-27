@@ -6,28 +6,24 @@ def index(request):
 
 def ProcessText(request):
 	# Get the Text
-	InpTxt= request.GET.get('textarea','default')
+	InpTxt= request.POST.get('textarea','default')
 
 	# Get the CheckBox Values
-	fullcaps=request.GET.get('upper','off')
-	puncRem = request.GET.get('removepunc','off')
+	fullcaps=request.POST.get('upper','off')
+	puncRem = request.POST.get('removepunc','off')
 
 	if fullcaps=='on':
 		tmpStr=""
 		for char in InpTxt:
 			tmpStr+= char.upper()
 		InpTxt= tmpStr
-		# params={'purpose':'Converted to upper case','result':tmpStr}
-		# return render(request,"al.html",params)
-
+		
 	if puncRem=='on':
 		punctuations= '''!()-[]{};:'"\,<>./?@#$%^&*_`~'''
 		tmpStr=""
 		for char in InpTxt:
 			if char not in punctuations:
 				tmpStr+= char
-		# params={'purpose':'Punctuations Removed','result':tmpStr}
-		# return render(request, 'al.html',params)
 		InpTxt=tmpStr
 	
 	if(fullcaps!='on' and puncRem != 'on'):
